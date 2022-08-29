@@ -1,50 +1,69 @@
 package pwr.edu.rehabapp.controller;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pwr.edu.rehabapp.dto.UserDto;
-import pwr.edu.rehabapp.entity.User;
-import pwr.edu.rehabapp.service.manager.UserManager;
+import pwr.edu.rehabapp.model.dto.AccountDto;
+import pwr.edu.rehabapp.model.dto.UserDto;
+import pwr.edu.rehabapp.service.UserService;
 
+@AllArgsConstructor
 @RestController
 @RequestMapping
 public class UserApi {
 
-    private UserManager users;
+    private UserService users;
 
-    @Autowired
-    public UserApi(UserManager users) {
-        this.users = users;
-    }
-
-    @GetMapping("api/user/all")
+    @GetMapping("api/admin/user/all")
     public Iterable<UserDto> getAllUsers() {
         return users.findAll();
     }
 
-    @GetMapping("api/user")
-    public UserDto getUserById(@RequestParam Long index) {
-        return users.findById(index);
+    @GetMapping("api/doctor/user")
+    public UserDto getUserByNumber(@RequestParam long number) {
+        return users.findByNumber(number);
     }
 
-    @PostMapping("api/admin/user")
-    public User addUser(@RequestBody User user ){
-        return  users.save(user);
+
+    @PostMapping("api/doctor/user")
+    public UserDto registerUser(@RequestBody UserDto userdto) {
+        return users.save(userdto);
     }
 
-    @PutMapping("api/admin/user")
-    public User updateUser(@RequestBody User user ){
-        return  users.save(user);
+
+
+    // TODO: fill AccountDto class and create method which implements login logic in SecurityConfig
+//    @PostMapping("api/doctor/user")
+//    public ResponseEntity<?> loginUser(@RequestBody AccountDto accountDto) {
+//        return null;
+//    }
+
+    @PutMapping("api/user/isonline")
+    public void updateIsOnline(@RequestParam long number, @RequestParam boolean online) {
+        users.setOnlineByNumber(number, online);
     }
+    //
 
     @DeleteMapping("api/admin/user")
-    public void deleteUser(@RequestBody Long index){
-        users.deleteById(index);
+    public void deleteUser(@RequestParam long number) {
+        users.deleteByNumber(number);
     }
 
-    @PatchMapping("api/admin/user")
-    public User partlyUpdateUser(@RequestBody User user ){
-        return  users.save(user);
+    @PutMapping("api/user/updatename")
+    public void updateName(@RequestParam long number, @RequestParam String name) {
+        users.setNameByNumber(number, name);
     }
+
+    @PutMapping("api/user/updateusername")
+    public void updateUsername(@RequestParam long number, @RequestParam String username) {
+        users.setUsernameByNumber(number, username);
+    }
+
+    @PutMapping("api/user/username")
+    public void updatePassword(@RequestParam long number, @RequestParam String password) {
+        users.setPasswordByNumber(number, password);
+    }
+
+
 }

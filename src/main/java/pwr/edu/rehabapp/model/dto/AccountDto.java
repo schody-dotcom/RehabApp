@@ -1,4 +1,4 @@
-package pwr.edu.rehabapp.dto;
+package pwr.edu.rehabapp.model.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,15 +11,8 @@ import java.io.Serializable;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserDto implements Serializable {
+public class AccountDto implements Serializable {
 
-    private int number;
-    private String role;
-    private boolean isOnline;
     private String email;
     private String password;
-
-    private String name;
-    private String username;
-
 }
