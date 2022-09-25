@@ -141,7 +141,7 @@ public class MockData {
                         .description(" ")
                         .image(" ")
                         .reps(8)
-                        .target(EnumSet.of(Target.LOWER_BACK))
+                        .target(EnumSet.of(Target.LOWER))
                         .type(EnumSet.of(Type.ISOMETRIC))
                         .build()
         );
