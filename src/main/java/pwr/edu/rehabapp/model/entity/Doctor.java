@@ -23,13 +23,13 @@ public class Doctor extends User {
 
     @Builder(builderMethodName = "doctorBuilder")
     public Doctor(Long id, Account account,
-                  Role role, boolean isOnline,
+                   boolean isOnline,
                   String name, String username,
                   long number, List<Patient> patients,
                   List<Appointment> appointments,
                   List<ExerciseSet> exerciseSets,
                   List<ExerciseSetPerformed> exerciseSetsPerformed) {
-        super(id, account, role, isOnline, name, username, number);
+        super(id, account, isOnline, name, username, number);
         this.patients = patients;
         this.appointments = appointments;
         this.exerciseSets = exerciseSets;

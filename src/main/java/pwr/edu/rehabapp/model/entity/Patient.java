@@ -35,14 +35,14 @@ public class Patient extends User {
     private String disease;
 
     @Builder(builderMethodName = "patientBuilder")
-    public Patient(Long id, Account account, Role role, boolean isOnline,
+    public Patient(Long id, Account account, boolean isOnline,
                    String name, String username, long number,
                    List<ExerciseSet> assignedExerciseSets,
                    List<Appointment> appointments,
                    List<ExerciseSetPerformed> exerciseSetsPerformed,
                    Doctor doctor, int height, LocalDate dateOfBirth,
                    int weight, String disease) {
-        super(id, account, role, isOnline, name, username, number);
+        super(id, account, isOnline, name, username, number);
         this.assignedExerciseSets = assignedExerciseSets;
         this.appointments = appointments;
         ExerciseSetsPerformed = exerciseSetsPerformed;

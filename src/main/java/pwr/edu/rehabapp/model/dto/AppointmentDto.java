@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ContactDto {
+public class AppointmentDto {
 
     private LocalDateTime date;
     private int time;

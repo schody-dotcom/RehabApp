@@ -23,13 +23,16 @@ public class ExerciseSetPerformedService {
 
     public ExerciseSetPerformedDto save(ExerciseSetPerformedDto exerciseSetPerformedDto) {
         ExerciseSetPerformed exerciseSetPerformed =
-                new ModelMapper().map(exerciseSetPerformedDto, ExerciseSetPerformed.class);
+                new ModelMapper()
+                        .map(exerciseSetPerformedDto, ExerciseSetPerformed.class);
         ExerciseSet exerciseSet = exerciseSetRepo.findByNumber(exerciseSetPerformed.getExerciseSet().getNumber());
+
         exerciseSetPerformed.setExerciseSet(exerciseSet);
         exerciseSetPerformed.getExercisesPerformed().forEach(this::assignExercise);
 
         ExerciseSetPerformed savedExerciseSetPerformed =
                 exerciseSetPerformedRepo.save(exerciseSetPerformed);
+
         return mapper.map(savedExerciseSetPerformed, ExerciseSetPerformedDto.class);
     }
 

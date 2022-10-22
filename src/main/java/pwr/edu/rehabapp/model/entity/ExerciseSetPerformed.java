@@ -38,7 +38,6 @@ public class ExerciseSetPerformed {
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private LocalDateTime endDate;
 
-    private Difficulty difficulty;
     private int assessment;
     private String message;
 

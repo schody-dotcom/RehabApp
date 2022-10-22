@@ -2,9 +2,7 @@ package pwr.edu.rehabapp.controller;
 
 
 import lombok.AllArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pwr.edu.rehabapp.model.dto.AccountDto;
 import pwr.edu.rehabapp.model.dto.UserDto;
 import pwr.edu.rehabapp.service.UserService;
 

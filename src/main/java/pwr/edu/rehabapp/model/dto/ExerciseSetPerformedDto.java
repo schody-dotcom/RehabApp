@@ -21,7 +21,6 @@ public class ExerciseSetPerformedDto {
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private LocalDateTime endDate;
     private List<ExercisePerformedDto> exercisesPerformed;
-    private Difficulty difficulty;
     private int assessment;
     private String message;
 

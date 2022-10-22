@@ -25,8 +25,6 @@ public class User {
     @JoinColumn(name = "account_id", referencedColumnName = "id")
     private Account account;
 
-    @Enumerated(EnumType.STRING)
-    private Role role;
     private boolean isOnline;
     private String name;
     private String username;

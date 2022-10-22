@@ -27,16 +27,17 @@ public class ExerciseApi {
     }
 
 
-
     @GetMapping("api/exercise/exercise-set")
     public List<ExerciseDto> getExercisesByExerciseSetNumber(@RequestParam long exerciseSetNumber) {
         return exercises.findExercisesByExerciseSetNumber(exerciseSetNumber);
     }
 
+    // obsluga wyjatkow - wyslac komunikat - nowy obiekt na komunikat trza zrobic
     @GetMapping("api/exercise/name")
     public ExerciseDetailsDto getExerciseByName(@RequestParam String exerciseName) {
         return exercises.findByName(exerciseName);
     }
+
 
 
 }

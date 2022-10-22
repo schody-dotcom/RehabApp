@@ -70,9 +70,9 @@ public class MockData {
     private void addAdmin() {
         userRepo.save(
                 User.builder()
-                        .role(Role.ADMIN)
                         .account(
                                 Account.builder()
+                                        .role(Role.ADMIN)
                                         .email("admin@rehab.pl")
                                         .password("123")
                                         .build()
@@ -88,9 +88,9 @@ public class MockData {
     private Doctor addDoctor() {
         return userRepo.save(
                 Doctor.doctorBuilder()
-                        .role(Role.DOCTOR)
                         .account(
                                 Account.builder()
+                                        .role(Role.DOCTOR)
                                         .email("doc1@rehab.pl")
                                         .password("123")
                                         .build()
@@ -106,9 +106,9 @@ public class MockData {
     private Patient addPatient() {
         return userRepo.save(
                 Patient.patientBuilder()
-                        .role(Role.PATIENT)
                         .account(
                                 Account.builder()
+                                        .role(Role.PATIENT)
                                         .email("patient1@rehab.pl")
                                         .password("123")
                                         .build()
