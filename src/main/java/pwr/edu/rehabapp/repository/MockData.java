@@ -3,6 +3,7 @@ package pwr.edu.rehabapp.repository;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import pwr.edu.rehabapp.model.entity.*;
 import pwr.edu.rehabapp.model.enums.Role;
@@ -25,6 +26,8 @@ public class MockData {
     private ExerciseRepo exerciseRepo;
     private ExerciseSetRepo exerciseSetRepo;
     private AppointmentRepo appointmentRepo;
+
+    private final PasswordEncoder passwordEncoder;
 
 
 
@@ -74,7 +77,7 @@ public class MockData {
                                 Account.builder()
                                         .role(Role.ADMIN)
                                         .email("admin@rehab.pl")
-                                        .password("123")
+                                        .password(passwordEncoder.encode("123"))
                                         .build()
                         )
                         .isOnline(true)
@@ -92,7 +95,7 @@ public class MockData {
                                 Account.builder()
                                         .role(Role.DOCTOR)
                                         .email("doc1@rehab.pl")
-                                        .password("123")
+                                        .password(passwordEncoder.encode("123"))
                                         .build()
                         )
                         .isOnline(true)
@@ -110,7 +113,7 @@ public class MockData {
                                 Account.builder()
                                         .role(Role.PATIENT)
                                         .email("patient1@rehab.pl")
-                                        .password("123")
+                                        .password(passwordEncoder.encode("123"))
                                         .build()
                         )
                         .isOnline(true)

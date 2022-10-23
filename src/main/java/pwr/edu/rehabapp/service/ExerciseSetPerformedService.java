@@ -1,6 +1,7 @@
 package pwr.edu.rehabapp.service;
 
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import pwr.edu.rehabapp.model.dto.ExerciseSetPerformedDto;
@@ -13,7 +14,7 @@ import pwr.edu.rehabapp.repository.ExerciseSetPerformedRepo;
 import pwr.edu.rehabapp.repository.ExerciseSetRepo;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class ExerciseSetPerformedService {
 
     private final ExerciseSetPerformedRepo exerciseSetPerformedRepo;

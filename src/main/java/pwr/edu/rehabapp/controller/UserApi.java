@@ -2,8 +2,11 @@ package pwr.edu.rehabapp.controller;
 
 
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pwr.edu.rehabapp.model.dto.AccountDto;
 import pwr.edu.rehabapp.model.dto.UserDto;
+import pwr.edu.rehabapp.service.AccountService;
 import pwr.edu.rehabapp.service.UserService;
 
 @AllArgsConstructor
@@ -14,8 +17,8 @@ public class UserApi {
     private UserService users;
 
     @GetMapping("api/admin/user/all")
-    public Iterable<UserDto> getAllUsers() {
-        return users.findAll();
+    public ResponseEntity<Iterable<UserDto>> getAllUsers() {
+        return ResponseEntity.ok().body(users.findAll());
     }
 
     @GetMapping("api/doctor/user")
@@ -29,13 +32,6 @@ public class UserApi {
         return users.save(userdto);
     }
 
-
-
-    // TODO: fill AccountDto class and create method which implements login logic in SecurityConfig
-//    @PostMapping("api/doctor/user")
-//    public ResponseEntity<?> loginUser(@RequestBody AccountDto accountDto) {
-//        return null;
-//    }
 
     @PutMapping("api/user/isonline")
     public void updateIsOnline(@RequestParam long number, @RequestParam boolean online) {

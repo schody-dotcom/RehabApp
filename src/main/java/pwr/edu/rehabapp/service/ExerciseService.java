@@ -2,6 +2,7 @@ package pwr.edu.rehabapp.service;
 
 
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import pwr.edu.rehabapp.model.dto.ExerciseDetailsDto;
@@ -17,14 +18,14 @@ import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Service
 @Transactional
 public class ExerciseService {
 
 
-    private ExerciseRepo exerciseRepo;
-    private ExerciseSetRepo exerciseSetRepo;
+    private final ExerciseRepo exerciseRepo;
+    private final ExerciseSetRepo exerciseSetRepo;
     private static final ModelMapper mapper = new ModelMapper();
 
     public List<ExerciseDetailsDto> findAll() {
