@@ -7,5 +7,6 @@ import pwr.edu.rehabapp.model.enums.exerciseset.Difficulty;
 public interface ExerciseSetRepo extends JpaRepository<ExerciseSet,Long> {
 
     ExerciseSet findByNumber(long number);
+    boolean existsByNumber(long number);
     ExerciseSet findByDifficulty(Difficulty difficulty);
 }

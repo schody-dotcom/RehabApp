@@ -18,7 +18,7 @@ public class ExerciseSetApi {
     private ExerciseSetService exerciseSets;
     private ExerciseService exercises;
 
-    @GetMapping("api/exerciseset/all")
+    @GetMapping("api/doctor/exerciseset/all")
     public List<ExerciseSetDto> getExerciseAll() {
         List<ExerciseSetDto> sets = exerciseSets.findAll();
         return sets;
@@ -30,8 +30,12 @@ public class ExerciseSetApi {
         return sets;
     }
 
+    @PostMapping("api/exerciseset")
+    public ExerciseSetDto postExerciseSet(@RequestBody ExerciseSetDto dto) {
+        return exerciseSets.save(dto);
+    }
 
-    @PostMapping("api/exerciseset/exercise")
+    @PostMapping("api/doctor/exerciseset/exercise")
     public ExerciseSetDto assignExerciseToExerciseSet(@RequestBody ExerciseToExerciseSetDto dto) {
         return exerciseSets.assignExerciseToExerciseSet(dto);
     }

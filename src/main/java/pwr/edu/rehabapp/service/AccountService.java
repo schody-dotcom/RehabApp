@@ -42,7 +42,7 @@ public class AccountService implements UserDetailsService {
             log.error("User not found in the database");
             throw new UsernameNotFoundException("User not found in the database");
         } else {
-            log.error("User found in the database: {}", email);
+            log.info("User found in the database: {}", email);
         }
 
         Collection<SimpleGrantedAuthority> authority = List.of(new SimpleGrantedAuthority(account.getRole().toString()));

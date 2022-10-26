@@ -21,7 +21,7 @@ public class UserApi {
         return ResponseEntity.ok().body(users.findAll());
     }
 
-    @GetMapping("api/doctor/user")
+    @GetMapping("api/admin/user")
     public UserDto getUserByNumber(@RequestParam long number) {
         return users.findByNumber(number);
     }

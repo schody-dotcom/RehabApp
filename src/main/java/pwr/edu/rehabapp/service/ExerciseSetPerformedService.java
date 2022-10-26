@@ -23,6 +23,11 @@ public class ExerciseSetPerformedService {
     private final ModelMapper mapper = new ModelMapper();
 
     public ExerciseSetPerformedDto save(ExerciseSetPerformedDto exerciseSetPerformedDto) {
+
+        if (!exerciseSetRepo.existsByNumber(exerciseSetPerformedDto.getExerciseSetNumber())) {
+            return null;
+        }
+
         ExerciseSetPerformed exerciseSetPerformed =
                 new ModelMapper()
                         .map(exerciseSetPerformedDto, ExerciseSetPerformed.class);
@@ -42,4 +47,6 @@ public class ExerciseSetPerformedService {
         Exercise byName = exerciseRepo.findByName(name);
         exercisePerformed.setExercise(byName);
     }
+
+
 }

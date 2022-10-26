@@ -3,6 +3,7 @@ package pwr.edu.rehabapp.service;
 
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import pwr.edu.rehabapp.model.dto.ExerciseDetailsDto;
@@ -21,6 +22,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Service
 @Transactional
+@Slf4j
 public class ExerciseService {
 
 
@@ -58,6 +60,11 @@ public class ExerciseService {
 
     public List<ExerciseDto> findExercisesByExerciseSetNumber(long exerciseSetNumber) {
         ExerciseSet exerciseSet = exerciseSetRepo.findByNumber(exerciseSetNumber);
+        if (exerciseSet == null) {
+            log.error("ExerciseService: findExercisesByExerciseSetNumber(): exerciseSet with number {} not found",
+                    exerciseSetNumber);
+            return null;
+        }
         List<Exercise> exercises = exerciseSet.getExercises();
 
         return mapToExerciseDtoList(exercises);
@@ -68,6 +75,7 @@ public class ExerciseService {
                 .map(ex -> mapper.map(ex, ExerciseDetailsDto.class))
                 .collect(Collectors.toList());
     }
+
     private List<ExerciseDto> mapToExerciseDtoList(List<Exercise> exercises) {
         return exercises.stream()
                 .map(ex -> mapper.map(ex, ExerciseDto.class))

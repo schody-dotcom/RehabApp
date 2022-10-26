@@ -76,5 +76,10 @@ public class ExerciseSetService {
     }
 
 
+    public ExerciseSetDto save(ExerciseSetDto dto) {
+        ExerciseSet entity = mapper.map(dto, ExerciseSet.class);
+        ExerciseSet savedEntity = exerciseSetRepo.save(entity);
 
+        return mapper.map(savedEntity, ExerciseSetDto.class);
+    }
 }

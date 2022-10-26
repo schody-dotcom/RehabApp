@@ -6,4 +6,5 @@ import pwr.edu.rehabapp.model.entity.ExerciseSetPerformed;
 
 @Repository
 public interface ExerciseSetPerformedRepo extends JpaRepository<ExerciseSetPerformed, Long> {
+
 }

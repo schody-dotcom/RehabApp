@@ -75,7 +75,7 @@ public class MockData {
                 User.builder()
                         .account(
                                 Account.builder()
-                                        .role(Role.ADMIN)
+                                        .role(Role.ROLE_ADMIN)
                                         .email("admin@rehab.pl")
                                         .password(passwordEncoder.encode("123"))
                                         .build()
@@ -93,7 +93,7 @@ public class MockData {
                 Doctor.doctorBuilder()
                         .account(
                                 Account.builder()
-                                        .role(Role.DOCTOR)
+                                        .role(Role.ROLE_DOCTOR)
                                         .email("doc1@rehab.pl")
                                         .password(passwordEncoder.encode("123"))
                                         .build()
@@ -111,7 +111,7 @@ public class MockData {
                 Patient.patientBuilder()
                         .account(
                                 Account.builder()
-                                        .role(Role.PATIENT)
+                                        .role(Role.ROLE_PATIENT)
                                         .email("patient1@rehab.pl")
                                         .password(passwordEncoder.encode("123"))
                                         .build()
