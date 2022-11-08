@@ -8,6 +8,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+//PU: przesyłanie feedbacku - informacje o wykonanym pojedynczym ćwiczeniu
 public class ExercisePerformedDto {
 
     private ExerciseDto exercise;

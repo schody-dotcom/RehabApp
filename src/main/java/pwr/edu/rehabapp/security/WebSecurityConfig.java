@@ -38,6 +38,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.sessionManagement().sessionCreationPolicy(STATELESS);
         http.authorizeRequests().antMatchers("/api/patient/**").hasAnyAuthority("ROLE_PATIENT");
         http.authorizeRequests().antMatchers("/api/doctor/**").hasAnyAuthority("ROLE_DOCTOR");
+        http.authorizeRequests().antMatchers("/console/**").permitAll();
+
+
        // http.authorizeRequests().antMatchers("/api/**").permitAll();
         http.authorizeHttpRequests().anyRequest().authenticated();
         http.addFilterBefore(new CustomAuthenticationFilter(authenticationManagerBean()), UsernamePasswordAuthenticationFilter.class);

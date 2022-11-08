@@ -12,6 +12,7 @@ import pwr.edu.rehabapp.service.UserService;
 @AllArgsConstructor
 @RestController
 @RequestMapping
+//Tylko funkcje pomocnicze
 public class UserApi {
 
     private UserService users;

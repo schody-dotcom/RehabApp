@@ -22,9 +22,11 @@ public class Exercise {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    //Jedno ćwiczenie może być zawarte w wielu zestawach ćwiczeń. Jeden zestaw ćwiczeń może zawierać jedno ćwiczenie o danej nazwie
     @OneToMany(mappedBy = "exercise")
     private List<ExercisePerformed> exercisesPerformed;
 
+    //Jedno ćwiczenie może znajdować się w wielu zestawach. Jeden zestaw może zawierać wiele ćwiczeń
     @ManyToMany(mappedBy = "exercises")
     private List<ExerciseSet> exerciseSets;
 

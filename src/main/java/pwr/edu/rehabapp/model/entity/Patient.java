@@ -52,4 +52,8 @@ public class Patient extends User {
         this.weight = weight;
         this.disease = disease;
     }
+
+    public boolean hasAccessToExerciseSet(long exerciseSetNumber) {
+        return assignedExerciseSets.stream().anyMatch(exerciseSet -> exerciseSet.getNumber() == exerciseSetNumber);
+    }
 }

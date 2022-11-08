@@ -9,6 +9,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+//Informacje, które będą znajdowały się w podglądzie pojedynczego zestawu ćwiczeń
 public class ExerciseDto implements Serializable {
 
     private String name;

@@ -14,10 +14,12 @@ import pwr.edu.rehabapp.service.ExerciseSetPerformedService;
 @AllArgsConstructor
 @RestController
 @RequestMapping
+//PU: Przesyłanie feedbacku
 public class ExerciseSetPerformedApi {
 
     private ExerciseSetPerformedService exerciseSetPerformedService;
 
+    //PU: Przesyłanie feedbacku
     @PostMapping("api/patient/feedback/save")
     public ResponseEntity<?> saveFeedback(@RequestBody ExerciseSetPerformedDto dto){
         ExerciseSetPerformedDto saveResult = exerciseSetPerformedService.save(dto);

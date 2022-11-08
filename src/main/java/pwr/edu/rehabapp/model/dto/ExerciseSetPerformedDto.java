@@ -13,6 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+//PU: Przesyłanie feedbacku - infromacje do wiadomosci zwrotnej. Zawiera liste wykonanych ćwiczeń w danym zestawie.
 public class ExerciseSetPerformedDto {
 
     private long exerciseSetNumber;
@@ -20,9 +21,9 @@ public class ExerciseSetPerformedDto {
     private LocalDateTime startDate;
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private LocalDateTime endDate;
-    private List<ExercisePerformedDto> exercisesPerformed;
-    private int assessment;
-    private String message;
+    private List<ExercisePerformedDto> exercisesPerformed; //lista wykonanych ćwiczeń
+    private int assessment; //ogólna ocena ćwiczenia wydana przez pacjenta
+    private String message; //wiadomość zwrotna
 
 
 }

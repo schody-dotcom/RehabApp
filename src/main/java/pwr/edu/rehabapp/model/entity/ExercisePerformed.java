@@ -11,6 +11,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+//Wykonane ćwiczenie
 public class ExercisePerformed {
 
 
@@ -18,11 +19,13 @@ public class ExercisePerformed {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
+    //Jedno ćwiczenie może być wykonane wiele razy
     @ManyToOne(cascade = CascadeType.DETACH)
     @JoinColumn(name = "exercise_id", referencedColumnName = "id")
     private Exercise exercise;
 
+    //W jednym wykonanym zestawie ćwiczeń znajduje się wiele wykonanych ćwiczeń.
+    // Jedno wykonane ćwiczenie należy tylko do jednego wykonanego zestawu
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "exercise_set_performed_id",
             referencedColumnName = "id")

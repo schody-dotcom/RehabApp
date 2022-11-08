@@ -1,18 +1,20 @@
 package pwr.edu.rehabapp.service;
 
 
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-import pwr.edu.rehabapp.model.dto.UserDto;
 import pwr.edu.rehabapp.mapper.UserMapper;
+import pwr.edu.rehabapp.model.dto.UserDto;
+import pwr.edu.rehabapp.model.entity.Account;
 import pwr.edu.rehabapp.model.entity.User;
+import pwr.edu.rehabapp.repository.AccountRepo;
 import pwr.edu.rehabapp.repository.UserRepo;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -20,6 +22,21 @@ import java.util.List;
 public class UserService {
 
     final private UserRepo userRepo;
+    final private AccountRepo accountRepo;
+
+    public User getLoggedUser(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = null;
+        if(authentication.isAuthenticated()){
+            Account account = accountRepo.findByEmail(authentication.getName());
+            if (account == null) {
+                return null;
+            }
+            user = userRepo.findByAccount(account);
+        }
+        return user;
+    }
+
 
     public User findUserByNumber(long number){
         return userRepo.findByNumber(number);

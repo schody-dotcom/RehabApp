@@ -34,6 +34,9 @@ public class ExerciseSet {
     @JoinColumn(name = "doctor_id", referencedColumnName = "id")
     private Doctor author;
 
+
+    //Jeden zestaw ćwiczeń może być przypisany do wielu pacjentów. Wielu pacjentów może mieć przypisany
+    // ten sam zestaw ćwiczeń
     @ManyToMany
     @JoinTable(
             name = "exercise_set_patient",
@@ -42,7 +45,7 @@ public class ExerciseSet {
     )
     private List<Patient> patients;
 
-
+    //Jeden zestaw ćwiczeń może być wykonywany wiele razy.
     @OneToMany(mappedBy = "exerciseSet")
     private List<ExerciseSetPerformed> exerciseSetsPerformed;
 

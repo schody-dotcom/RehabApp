@@ -12,14 +12,16 @@ import java.util.List;
 @NoArgsConstructor
 public class Doctor extends User {
 
+    //Jeden lekarz posiada wielu pacjentów. Jeden pacjent ma jednego lekarza
     @OneToMany(mappedBy = "doctor")
     private List<Patient> patients;
 
-    @OneToMany(mappedBy = "doctor")
-    private List<Appointment> appointments;
-
+    //Jeden lekarz ma dostęp do wielu zestawów ćwiczeń. Jeden zestaw ćwiczeń może być stworzony przez jednego lekarza
     @OneToMany(mappedBy = "author")
     private List<ExerciseSet> exerciseSets;
+
+    @OneToMany(mappedBy = "doctor")
+    private List<Appointment> appointments;
 
     @Builder(builderMethodName = "doctorBuilder")
     public Doctor(Long id, Account account,

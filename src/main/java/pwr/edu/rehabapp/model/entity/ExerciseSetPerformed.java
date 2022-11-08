@@ -21,13 +21,17 @@ public class ExerciseSetPerformed {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    //Tabela łącząca wykonany zestaw ćwiczeń z pacjentem, który go wykonał
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "patient_id", referencedColumnName = "id")
     private Patient patient;
 
+    //Jeden wykonany zestaw ćwiczeń zawiera wiele wykonancyh pojedynczych ćwiczeń. Jedno wykonane ćwiczenie jest
+    //przypisane do jednego wykonanego zestawu
     @OneToMany(mappedBy = "exerciseSetPerformed", orphanRemoval = true, cascade = CascadeType.ALL)
     private List<ExercisePerformed> exercisesPerformed;
 
+    //Tabela łącząca wykonany zestaw ćwiczeń z zestawem do wykonania.
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "exercise_set_id", referencedColumnName = "id")
     private ExerciseSet exerciseSet;

@@ -38,6 +38,9 @@ public class ExerciseService {
 
     public ExerciseDetailsDto findByName(String name) {
         Exercise exercise = exerciseRepo.findByName(name);
+        if (exercise == null) {
+            return null;
+        }
         return new ModelMapper().map(exercise, ExerciseDetailsDto.class);
     }
 
