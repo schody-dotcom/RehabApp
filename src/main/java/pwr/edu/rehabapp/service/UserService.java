@@ -5,16 +5,15 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-import pwr.edu.rehabapp.mapper.UserMapper;
-import pwr.edu.rehabapp.model.dto.UserDto;
-import pwr.edu.rehabapp.model.entity.Account;
-import pwr.edu.rehabapp.model.entity.User;
+import pwr.edu.rehabapp.utilities.mapper.UserMapper;
+import pwr.edu.rehabapp.dto.UserDto;
+import pwr.edu.rehabapp.entity.Account;
+import pwr.edu.rehabapp.entity.User;
 import pwr.edu.rehabapp.repository.AccountRepo;
 import pwr.edu.rehabapp.repository.UserRepo;
 
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -23,6 +22,7 @@ public class UserService {
 
     final private UserRepo userRepo;
     final private AccountRepo accountRepo;
+
 
     public User getLoggedUser(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -35,6 +35,12 @@ public class UserService {
             user = userRepo.findByAccount(account);
         }
         return user;
+    }
+
+    public User findByEmail(String email) {
+        Account account = accountRepo.findByEmail(email);
+        return userRepo.findByAccount(account);
+
     }
 
 
@@ -80,4 +86,6 @@ public class UserService {
     public void setPasswordByNumber(Long number, String password){
         findUserByNumber(number).setName(password);
     }
+
+
 }

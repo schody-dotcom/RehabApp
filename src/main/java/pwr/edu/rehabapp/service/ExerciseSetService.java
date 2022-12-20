@@ -4,17 +4,14 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
-import pwr.edu.rehabapp.model.dto.ExerciseSetDto;
-import pwr.edu.rehabapp.model.dto.request.ExerciseToExerciseSetDto;
-import pwr.edu.rehabapp.model.entity.Exercise;
-import pwr.edu.rehabapp.model.entity.ExerciseSet;
-import pwr.edu.rehabapp.model.entity.Patient;
-import pwr.edu.rehabapp.model.entity.User;
-import pwr.edu.rehabapp.repository.ExerciseRepo;
-import pwr.edu.rehabapp.repository.ExerciseSetRepo;
-import pwr.edu.rehabapp.repository.PatientRepo;
-import pwr.edu.rehabapp.repository.UserRepo;
-
+import pwr.edu.rehabapp.dto.ExerciseSetDto;
+import pwr.edu.rehabapp.dto.request.ExerciseToExerciseSetDto;
+import pwr.edu.rehabapp.entity.Exercise;
+import pwr.edu.rehabapp.entity.ExerciseSet;
+import pwr.edu.rehabapp.entity.Patient;
+import pwr.edu.rehabapp.entity.User;
+import pwr.edu.rehabapp.model.entity.*;
+import pwr.edu.rehabapp.repository.*;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,14 +22,12 @@ import java.util.stream.Collectors;
 @Transactional
 public class ExerciseSetService {
 
-
     final private ExerciseSetRepo exerciseSetRepo;
     final private ExerciseRepo exerciseRepo;
     final private PatientRepo patientRepo;
-    final private UserService userService;
-    final private UserRepo userRepo;
-    private static final ModelMapper mapper = new ModelMapper();
     final private ExerciseService exerciseService;
+    final private UserService userService;
+    private static final ModelMapper mapper = new ModelMapper();
 
     //PU: Wykonywanie zestawu ćwiczeń - szukanie zestawu po jego numerze
     public ExerciseSetDto findByNumber(long number) {
@@ -49,18 +44,19 @@ public class ExerciseSetService {
         }
         ExerciseSet exerciseSet = exerciseSetRepo.findByNumber(number);
 
-        return new ModelMapper().map(exerciseSet, ExerciseSetDto.class);
+        ExerciseSetDto exerciseSetDto = new ModelMapper().map(exerciseSet, ExerciseSetDto.class);
+        exerciseSetDto.setExercises(exerciseService.mapToExerciseDetailsDtoList(exerciseSet.getExercises()));
+        return exerciseSetDto;
     }
+
 
     //PU: Przeglądanie listy zestawów ćwiczeń
     public List<ExerciseSetDto> findExerciseSetsByPatientNumber(long patientNumber) {
-
 
         Patient patient = patientRepo.findByNumber(patientNumber);
         if (patient == null) {
             return null;
         }
-
         List<ExerciseSetDto> sets = new ArrayList<>();
         if (!CollectionUtils.isEmpty(patient.getAssignedExerciseSets())) {
             patient.getAssignedExerciseSets()
@@ -69,9 +65,12 @@ public class ExerciseSetService {
                     );
         } else
             return null;
-
         return sets;
     }
+
+
+
+
 
 
 

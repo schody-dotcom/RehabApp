@@ -4,9 +4,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pwr.edu.rehabapp.model.dto.ExerciseSetDto;
-import pwr.edu.rehabapp.model.dto.request.ExerciseToExerciseSetDto;
-import pwr.edu.rehabapp.service.ExerciseService;
+import pwr.edu.rehabapp.dto.ExerciseSetDto;
+import pwr.edu.rehabapp.dto.request.ExerciseToExerciseSetDto;
 import pwr.edu.rehabapp.service.ExerciseSetService;
 
 import java.util.List;
@@ -18,7 +17,6 @@ import java.util.List;
 public class ExerciseSetApi {
 
     private ExerciseSetService exerciseSetService;
-    private ExerciseService exercises;
 
     /*PU: Wykonywanie zestawu ćwiczeń - pobieranie całego zestawu ze wszystkimi szczegółami
      (ExerciseSetDto zawiera listę ćwiczeń) */
@@ -43,6 +41,10 @@ public class ExerciseSetApi {
         }
         return ResponseEntity.ok(sets);
     }
+
+
+
+
 
 /*--------------------------------------------------------------------------------------------------------------------*/
 //Metody pomocnicze

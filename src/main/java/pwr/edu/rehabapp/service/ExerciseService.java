@@ -1,17 +1,14 @@
 package pwr.edu.rehabapp.service;
 
 
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
-import pwr.edu.rehabapp.model.dto.ExerciseDetailsDto;
-import pwr.edu.rehabapp.model.dto.ExerciseDto;
-import pwr.edu.rehabapp.model.entity.Exercise;
-import pwr.edu.rehabapp.model.entity.ExerciseSet;
-import pwr.edu.rehabapp.model.enums.exerciseset.Target;
-import pwr.edu.rehabapp.model.enums.exerciseset.Type;
+import pwr.edu.rehabapp.dto.ExerciseDetailsDto;
+import pwr.edu.rehabapp.dto.ExerciseDto;
+import pwr.edu.rehabapp.entity.Exercise;
+import pwr.edu.rehabapp.entity.ExerciseSet;
 import pwr.edu.rehabapp.repository.ExerciseRepo;
 import pwr.edu.rehabapp.repository.ExerciseSetRepo;
 
@@ -30,6 +27,12 @@ public class ExerciseService {
     private final ExerciseSetRepo exerciseSetRepo;
     private static final ModelMapper mapper = new ModelMapper();
 
+    private List<ExerciseDto> mapToExerciseDtoList(List<Exercise> exercises) {
+        return exercises.stream()
+                .map(ex -> mapper.map(ex, ExerciseDto.class))
+                .collect(Collectors.toList());
+    }
+
     public List<ExerciseDetailsDto> findAll() {
         List<Exercise> exercises = exerciseRepo.findAll();
 
@@ -44,20 +47,10 @@ public class ExerciseService {
         return new ModelMapper().map(exercise, ExerciseDetailsDto.class);
     }
 
-    public ExerciseDetailsDto findByTarget(Target target) {
-        Exercise exercise = exerciseRepo.findByTarget(target);
-        return new ModelMapper().map(exercise, ExerciseDetailsDto.class);
-    }
-
-    public ExerciseDetailsDto findByType(Type type) {
-        Exercise exercise = exerciseRepo.findByType(type);
-        return new ModelMapper().map(exercise, ExerciseDetailsDto.class);
-    }
-
     public ExerciseDetailsDto save(ExerciseDetailsDto exerciseDetailsDto) {
         Exercise exercise = new ModelMapper().map(exerciseDetailsDto, Exercise.class);
         Exercise savedExercise = exerciseRepo.save(exercise);
-        return mapper.map(savedExercise, ExerciseDetailsDto.class);
+        return mapToExerciseDetailsDto(savedExercise);
     }
 
 
@@ -73,15 +66,18 @@ public class ExerciseService {
         return mapToExerciseDtoList(exercises);
     }
 
-    private List<ExerciseDetailsDto> mapToExerciseDetailsDtoList(List<Exercise> exercises) {
+    public List<ExerciseDetailsDto> mapToExerciseDetailsDtoList(List<Exercise> exercises) {
         return exercises.stream()
-                .map(ex -> mapper.map(ex, ExerciseDetailsDto.class))
+                .map(this::mapToExerciseDetailsDto)
                 .collect(Collectors.toList());
     }
 
-    private List<ExerciseDto> mapToExerciseDtoList(List<Exercise> exercises) {
-        return exercises.stream()
-                .map(ex -> mapper.map(ex, ExerciseDto.class))
-                .collect(Collectors.toList());
+
+
+    public ExerciseDetailsDto mapToExerciseDetailsDto(Exercise exercise) {
+        ExerciseDetailsDto exerciseDto = mapper.map(exercise, ExerciseDetailsDto.class);
+        exerciseDto.setTypes(exercise.getFeatures().stream().map(feature -> feature.getType().toString()).toList());
+        exerciseDto.setTargets(exercise.getTraits().stream().map(trait -> trait.getTarget().toString()).toList());
+        return exerciseDto;
     }
 }

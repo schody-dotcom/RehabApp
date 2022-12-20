@@ -4,8 +4,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pwr.edu.rehabapp.model.dto.ExerciseDetailsDto;
-import pwr.edu.rehabapp.model.dto.ExerciseDto;
+import pwr.edu.rehabapp.dto.ExerciseDetailsDto;
+import pwr.edu.rehabapp.dto.ExerciseDto;
 import pwr.edu.rehabapp.service.ExerciseService;
 
 import java.util.List;
@@ -38,7 +38,7 @@ public class ExerciseApi {
 
     //funkcja pomocnicza - dla roli lekarza
     @GetMapping("api/doctor/exercise/name")
-    public ResponseEntity getExerciseByName(@RequestParam String exerciseName) {
+    public ResponseEntity<?> getExerciseByName(@RequestParam String exerciseName) {
         ExerciseDetailsDto exerciseByName = exerciseService.findByName(exerciseName);
 
         if (exerciseByName == null) {

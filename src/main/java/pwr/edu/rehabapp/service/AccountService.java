@@ -10,19 +10,12 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import pwr.edu.rehabapp.mapper.UserMapper;
-import pwr.edu.rehabapp.model.dto.AccountDto;
-import pwr.edu.rehabapp.model.dto.UserDto;
-import pwr.edu.rehabapp.model.entity.Account;
-import pwr.edu.rehabapp.model.entity.User;
-import pwr.edu.rehabapp.model.enums.Role;
+import pwr.edu.rehabapp.dto.AccountDto;
+import pwr.edu.rehabapp.entity.Account;
 import pwr.edu.rehabapp.repository.AccountRepo;
-import pwr.edu.rehabapp.repository.UserRepo;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 @RequiredArgsConstructor
